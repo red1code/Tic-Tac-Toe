@@ -1,7 +1,10 @@
 :root {
   --gap: 15px;
-  --primary-color: #666600;
-  --accent-color: #ffffbf;
+  --primary-color: #fdfefd;
+  --accent-color: #282829;
+  --Third-color: #1c58b9;
+  --fourth-color: #3aaa57;
+  --font: sans-serif;
 }
 
 a {
@@ -11,7 +14,7 @@ a {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: var(--font);
   min-width: 300px;
   min-height: 100vh;
   background-color: var(--primary-color);
@@ -23,9 +26,11 @@ body {
 
 header,
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--primary-color);
-  text-align: center;
-  padding: calc(var(--gap)/2) var(--gap);
+  padding: var(--gap);
   background-color: var(--accent-color);
 }
 
@@ -33,19 +38,38 @@ header h2 {
   margin: 0;
 }
 
+header h2 span {
+  white-space: nowrap;
+}
+
 main {
   flex: 1;
-  text-align: center;  
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.player-role {
+  float: left;
+  margin-bottom: 1rem;
+}
+
+#Player1 {
+  color: var(--Third-color);
+  font-size: x-large;
+}
+
+#Player2 {
+  color: var(--fourth-color);
+  font-size: x-large;
+}
+
 .wrapper {
   display: inline-block;
   position: relative;
-  width: clamp(250px, 90%, 500px);
+  width: clamp(250px, 90%, 400px);
 }
 
 #dummy {
@@ -66,12 +90,38 @@ main {
 }
 
 .spot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--primary-color);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--Third-color);
+  cursor: pointer;
 }
 
 .spot:hover {
   filter: brightness(1.3);
 }
+
+.reset-btn {
+  background-color: darkred;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: .9rem;
+  margin-top: 1rem;
+  padding: calc(var(--gap) / 2) var(--gap);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  filter: brightness(1.2);
+  transition: .3s;
+}
+
+/* footer styles */
 
 .love-emoji {
   color: red;
@@ -84,4 +134,14 @@ main {
 .red1dev-link {
   color: var(--primary-color);
   font-weight: bold;
+}
+
+/* changeable classes */
+
+.player-1 {
+  color: var(--Third-color);
+}
+
+.player-2 {
+  color: var(--fourth-color);
 }

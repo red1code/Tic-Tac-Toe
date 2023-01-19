@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,29 +10,36 @@
   </head>
 
   <body>
-
     <header>
-      <h2>Hello there. Enjoy Tic Tac Toe game!</h2>
+      <h2>Hello! <span>Enjoy Tic Tac Toe game!</span></h2>
     </header>
 
     <main>
+      <h3 class="player-role">
+        Role of:
+        <span id="Player1">Player-1</span>
+        <span id="Player2">Player-2</span>
+      </h3>
+
       <div class="wrapper">
 
         <div id="dummy"></div>
 
         <div class="game-board">
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
-          <div class="spot"></div>
+          <div class="spot" id="A1"></div>
+          <div class="spot" id="B1"></div>
+          <div class="spot" id="C1"></div>
+          <div class="spot" id="A2"></div>
+          <div class="spot" id="B2"></div>
+          <div class="spot" id="C2"></div>
+          <div class="spot" id="A3"></div>
+          <div class="spot" id="B3"></div>
+          <div class="spot" id="C3"></div>
         </div>
 
       </div>
+
+      <button type="button" class="reset-btn" id="rstBtn">Reset</button>
     </main>
 
     <footer>
@@ -47,7 +53,5 @@
         <span id="year-holder"></span>
       </div>
     </footer>
-
   </body>
-
 </html>
