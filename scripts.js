@@ -1,4 +1,5 @@
-/*
+/* spots IDs:
+
 A1 B1 C1
 A2 B2 C2
 A3 B3 C3
@@ -11,18 +12,17 @@ const spanPlayer2 = document.getElementById('Player2');
 const resetBtn = document.getElementById('rstBtn');
 
 const Gameboard = (() => {
-  const _gameboard = [];
+  let _gameboard = [];
+  let _gameEnded = false;
   const getGameBoard = () => _gameboard;
   const addToGameBoard = (spotId, player) => {
-    _gameboard.push({
-      spot: spotId,
-      player: player.getName()
-    })
+    _gameboard.push({ spot: spotId, player: player.getName() })
   }
-  return {
-    getGameBoard,
-    addToGameBoard
+  const isGameEnded = () => _gameEnded;
+  const endTheGame = () => {
+    _gameEnded = true
   }
+  return { getGameBoard, addToGameBoard, isGameEnded, endTheGame }
 })();
 
 const Player = (name, color) => {
@@ -60,31 +60,25 @@ async function handlePlayersClicks(event) {
     return;
   }
   if (playerX.getRole() === true) {
-    playerX.addToSpots(event.target.id);
-    Gameboard.addToGameBoard(event.target.id, playerX);
-    renderBoard();
-    event.target.classList.add('player-1');
-
-    if (checkForWin(playerX.getSpots())) {
-      await showWinner('PlayerX');
-      return;
-    }
-    changeRoles()
-    showPlayerRole();
+    play(playerX, event);
   }
   else {
-    playerO.addToSpots(event.target.id);
-    Gameboard.addToGameBoard(event.target.id, playerO);
-    renderBoard();
-    event.target.classList.add('player-2');
-    if (checkForWin(playerO.getSpots())) {
-      await showWinner('PlayerO');
-      return;
-    }
-    changeRoles()
-    showPlayerRole();
+    play(playerO, event);
   }
+  changeRoles()
+  showPlayerRole();
   checkForDraw();
+}
+
+function play(player, event) {
+  player.addToSpots(event.target.id);
+  Gameboard.addToGameBoard(event.target.id, player);
+  renderBoard();
+  event.target.classList.add(player.getName() === 'X' ? 'player-1' : 'player-2');
+  if (checkForWin(player.getSpots())) {
+    Gameboard.endTheGame();
+    showWinner(player.getName());
+  }
 }
 
 function renderBoard() {
@@ -107,8 +101,6 @@ function showPlayerRole() {
 function resetBoard() {
   location.reload()
 }
-
-// private methods
 
 function changeRoles() {
   playerX.changeRole();
@@ -148,19 +140,27 @@ function checkForWin(playedSpots) {
 }
 
 function checkForDraw() {
+  if (Gameboard.isGameEnded()) {
+    return;
+  }
   let spotsArr = [];
   spots.forEach(spot => spotsArr.push(spot));
-  const isDrwa = spotsArr.every(spot => spot.textContent != '');
-  if (isDrwa === true) {
+  const allSpotsClicked = spotsArr.every(spot => spot.textContent != '');
+  if (allSpotsClicked === true) {
     setTimeout(() => { alert('Draw!') }, 0);
   }
 }
 
 function showWinner(winner) {
-  return new Promise((resolve, reject) => {
-    resolve(setTimeout(() => {
-      alert(`${winner} wins!`);
-      spots.forEach(spot => spot.removeEventListener('click', handlePlayersClicks));
-    }, 0))
-  })
+  setTimeout(() => {
+    alert(`${winner} wins!`);
+    spots.forEach(spot => spot.removeEventListener('click', handlePlayersClicks));
+  }, 0)
+}
+
+
+// special methods
+
+function print(msg) {
+  console.warn(msg);
 }
