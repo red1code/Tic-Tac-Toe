@@ -56,12 +56,12 @@ main {
   margin-bottom: 1rem;
 }
 
-#Player1 {
+#PlayerX {
   color: var(--Third-color);
   font-size: x-large;
 }
 
-#Player2 {
+#PlayerO {
   color: var(--fourth-color);
   font-size: x-large;
 }
