@@ -7,9 +7,9 @@ A3 B3 C3
 document.getElementById('year-holder').textContent = new Date().getFullYear();
 
 const spots = document.querySelectorAll('.spot');
-const spanPlayer1 = document.getElementById('Player1');
-const spanPlayer2 = document.getElementById('Player2');
-const resetBtn = document.getElementById('rstBtn');
+const spanPlayerX = document.getElementById('PlayerX');
+const spanPlayerO = document.getElementById('PlayerO');
+const resetBtn = document.getElementById('resetBtn');
 
 const Gameboard = (() => {
   let _gameboard = [];
@@ -89,12 +89,12 @@ function renderBoard() {
 
 function showPlayerRole() {
   if (playerX.getRole()) {
-    spanPlayer1.style.display = 'inline';
-    spanPlayer2.style.display = 'none';
+    spanPlayerX.style.display = 'inline';
+    spanPlayerO.style.display = 'none';
   }
   else {
-    spanPlayer1.style.display = 'none';
-    spanPlayer2.style.display = 'inline';
+    spanPlayerX.style.display = 'none';
+    spanPlayerO.style.display = 'inline';
   }
 }
 
